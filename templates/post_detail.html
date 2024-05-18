@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title%} Post Detail Page {% endblock %}
+
+{% block content %}
+
+<h1>{{ post.title }}</h1>
+
+<p>{{ post.content }}</p>
+
+<i>By {{ post.user.first_name}} {{ post.user.last_name }} on {{ post.created_at }}</i>
+
+{% if post.tags %}
+<p>
+    <b>Tags:</b>
+    {% for tag in post.tags %}
+    <a href="/tags/{{tag.id}}"><i>{{ tag.name }}</i></a>
+    {% endfor %}
+</p>
+{% endif %}
+
+<form action="/users/{{post.user.id}}"><button>Cancel</button></form>
+<form action="/posts/{{post.id}}/edit"><button>Edit</button></form>
+<form action="/posts/{{post.id}}/delete" method="POST"><button>Delete</button></form>
+
+{% endblock %}
